@@ -1,0 +1,30 @@
+version: '3'
+services:
+  ui:
+    build:
+    #This sets the build context to the root directory of the project
+    #This way, the files needed for the build is gotten from the root directory
+      context: ./
+      dockerfile: Docker-files/ui/Dockerfile
+    expose:
+      - 8000
+    volumes:
+      - /app/dist:/app/dist
+  backend:
+    build:
+      context: ./      
+      dockerfile: Docker-files/backend/Dockerfile
+    expose:
+      - 5000
+    env_file:
+      - .env
+  proxy:
+    build: 
+      context: ./Docker-files/nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - /app/dist:/usr/share/nginx/html 
+
+  
