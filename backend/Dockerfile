@@ -8,10 +8,11 @@ COPY requirements.txt ./
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip3 install -r requirements.txt
 
-COPY . .
+COPY . /app
 
 ENV FLASK_APP main.py
 
 EXPOSE 5000
 
-CMD ["flask", "run"]
+# Executable Command
+CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0" ]

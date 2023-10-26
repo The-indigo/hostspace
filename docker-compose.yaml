@@ -8,13 +8,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
-    env_file:
-      - .env
+    container_name: ui
+    
   backend:
     build:
       context: ./backend      
       dockerfile: Dockerfile
+    #can use expose as well. Ports allows to specify external and internal network port
+    #This way you can test the backend with localhost or public ip on port 5000
     ports:
       - 5000:5000
+    container_name: backend
     env_file:
-      - .env
+      - ./backend/.env
