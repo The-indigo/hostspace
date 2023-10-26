@@ -59,6 +59,7 @@ jobs:
           # push it to ECR so that it can
           # be deployed to ECS.
           docker compose -p $IMAGE_TAG create
+          docker images
           docker tag community-ui:latest $ECR_REGISTRY/$ECR_REPOSITORY_V:$IMAGE_UI
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_UI
           echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_UI" >> $GITHUB_OUTPUT
