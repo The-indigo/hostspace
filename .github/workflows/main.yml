@@ -60,15 +60,12 @@ jobs:
           # be deployed to ECS.
           #docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker compose -p $IMAGE_TAG create
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:backend
-          echo "steps=steps.build-image.outputs"
-          echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY:backend" >> $GITHUB_OUTPUT
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui
-          echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY:ui" >> $GITHUB_OUTPUT
-
-      - name: Print image value
-        run: |
-          echo "The first value of steps.build-image.outputs.image is: ${{ steps.build-image.outputs}}"
+          docker tag $IMAGE_UI:latest $ECR_REGISTRY/$ECR_REPOSITORY_V:$IMAGE_UI
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_UI
+          echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_UI" >> $GITHUB_OUTPUT
+          docker tag $IMAGE_BACKEND:latest $ECR_REGISTRY/$ECR_REPOSITORY_F:$IMAGE_BACKEND
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_BACKEND
+          echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_BACKEND" >> $GITHUB_OUTPUT
 
 
       - name: Fill in the new image ID in the Amazon ECS task definition
@@ -77,11 +74,7 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME_V }}
-          image: docker.io/library/community-ui
-
-      - name: Print image value
-        run: |
-          echo "The seconf value of steps.build-image.outputs.image is: ${{ steps.build-image.outputs}}"
+          image: ${{ steps.build-image.outputs.uiimage }}
 
 
       - name: Fill in the new image ID in the Amazon ECS task definition
@@ -90,9 +83,7 @@ jobs:
         with:
           task-definition: ${{ steps.task-def-ui.outputs.task-definition }}
           container-name: ${{ env.CONTAINER_NAME_F }}
-          run: |
-             echo "steps=steps.build-image.outputs"
-          image: docker.io/library/community-backend
+          mage: ${{ steps.build-image.outputs.backendimage }}
 
 
       - name: Deploy Amazon ECS task definition
