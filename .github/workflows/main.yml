@@ -66,6 +66,11 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui
           echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY:ui" >> $GITHUB_OUTPUT
 
+      - name: Print image value
+        run: |
+          echo "The first value of steps.build-image.outputs.image is: ${{ steps.build-image.outputs}}"
+
+
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def-ui
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
@@ -73,6 +78,11 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME_V }}
           image: docker.io/library/community-ui
+
+      - name: Print image value
+        run: |
+          echo "The seconf value of steps.build-image.outputs.image is: ${{ steps.build-image.outputs}}"
+
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def-backend
