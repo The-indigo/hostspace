@@ -58,13 +58,16 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          #docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          echo "registry is ${{ steps.login-ecr.outputs.registry }}"
           docker compose -p $IMAGE_TAG create
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:backend
-          echo "steps=steps.build-image.outputs"
-          echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY:backend" >> $GITHUB_OUTPUT
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui
-          echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY:ui" >> $GITHUB_OUTPUT
+          docker images
+          docker tag community-ui:latest $ECR_REGISTRY/$ECR_REPOSITORY_V
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_V
+          echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY-v" >> $GITHUB_OUTPUT
+          docker tag community-backend:latest $ECR_REGISTRY/$ECR_REPOSITORY_F
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_F
+          echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY_F" >> $GITHUB_OUTPUT
+
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def-ui
@@ -72,7 +75,8 @@ jobs:
         with:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME_V }}
-          image: ${{ steps.build-image.outputs.comm }}
+          image: ${{ steps.build-image.outputs.uiimage }}
+
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def-backend
@@ -80,9 +84,7 @@ jobs:
         with:
           task-definition: ${{ steps.task-def-ui.outputs.task-definition }}
           container-name: ${{ env.CONTAINER_NAME_F }}
-          run: |
-             echo "steps=steps.build-image.outputs"
-          image: ${{ steps.build-image.outputs.image }}
+          mage: ${{ steps.build-image.outputs.backendimage }}
 
 
       - name: Deploy Amazon ECS task definition
