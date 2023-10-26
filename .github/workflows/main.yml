@@ -60,12 +60,12 @@ jobs:
           # be deployed to ECS.
           docker compose -p $IMAGE_TAG create
           docker images
-          docker tag community-ui:latest $ECR_REGISTRY/$ECR_REPOSITORY_V:$IMAGE_UI
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_UI
-          echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_UI" >> $GITHUB_OUTPUT
-          docker tag community-backend:latest $ECR_REGISTRY/$ECR_REPOSITORY_F:$IMAGE_BACKEND
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_BACKEND
-          echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_BACKEND" >> $GITHUB_OUTPUT
+          docker tag community-ui:latest $ECR_REGISTRY/$ECR_REPOSITORY_V
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_V
+          echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY-v" >> $GITHUB_OUTPUT
+          docker tag community-backend:latest $ECR_REGISTRY/$ECR_REPOSITORY_F
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_F
+          echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY_F" >> $GITHUB_OUTPUT
 
 
       - name: Fill in the new image ID in the Amazon ECS task definition
