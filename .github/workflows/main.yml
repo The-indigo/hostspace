@@ -80,6 +80,8 @@ jobs:
         with:
           task-definition: ${{ steps.task-def-ui.outputs.task-definition }}
           container-name: ${{ env.CONTAINER_NAME_F }}
+          run: |
+             echo "steps=steps.build-image.outputs"
           image: ${{ steps.build-image.outputs.image }}
 
 
