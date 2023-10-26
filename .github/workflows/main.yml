@@ -21,9 +21,9 @@ env:
   ECS_SERVICE: ${{ secrets.ECS_SERVICE }}                 # set this to your Amazon ECS service name
   ECS_CLUSTER: ${{ secrets.ECS_CLUSTER }}               # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: ${{ secrets.ECS_TASK_DEFINITION }}   # set this to the path to your Amazon ECS task definition
-                                               # file, e.g. .aws/task-definition.json
+                                              # file, e.g. .aws/task-definition.json
   CONTAINER_NAME_F: backend           # set this to the name of the container in the
-                                               # containerDefinitions section of your task definition
+                                              # containerDefinitions section of your task definition
   CONTAINER_NAME_V: ui
   IMAGE_UI: ui
   IMAGE_BACKEND: backend
@@ -81,7 +81,6 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME_F }}
           image: ${{ steps.build-image.outputs.backend }}
 
-         
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
