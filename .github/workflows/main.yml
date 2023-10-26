@@ -60,10 +60,11 @@ jobs:
           # be deployed to ECS.
           #docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker compose -p $IMAGE_TAG create
-          docker tag docker.io/library/community-ui $ECR_REGISTRY/$ECR_REPOSITORY_V:$IMAGE_UI
+          docker compose ps
+          docker tag docker.io/library/community-ui:latest $ECR_REGISTRY/$ECR_REPOSITORY_V:$IMAGE_UI
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_UI
           echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_UI" >> $GITHUB_OUTPUT
-          docker tag docker.io/library/community-backend $ECR_REGISTRY/$ECR_REPOSITORY_F:$IMAGE_BACKEND
+          docker tag docker.io/library/community-backend:latest $ECR_REGISTRY/$ECR_REPOSITORY_F:$IMAGE_BACKEND
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_BACKEND
           echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_BACKEND" >> $GITHUB_OUTPUT
 
