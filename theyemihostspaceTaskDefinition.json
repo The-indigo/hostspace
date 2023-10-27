@@ -14,7 +14,7 @@
                     "appProtocol": "http"
                 }
             ],
-            "dependson":[
+            "dependsOn":[
                 {
                     "containername": "backend",
                     "condition": "start"
