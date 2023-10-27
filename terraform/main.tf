@@ -96,10 +96,11 @@ resource "aws_ecs_service" "theyemihostspaceService" {
   cluster         = aws_ecs_cluster.hostspaceCluster.id
   task_definition = aws_ecs_task_definition.theyemihostspaceTaskDefinition.arn
   desired_count   = 1
-
+launch_type = "FARGATE"
   network_configuration {
     subnets = [ "subnet-02cb571218d81d7ee", "subnet-0049ab68963350a8c", "subnet-07f653468f06b14ff" ]
     security_groups = ["sg-0596a34e33519c972"]
+    assign_public_ip = true
   }
 
 }

@@ -54,7 +54,7 @@ jobs:
           docker images
           docker tag community-ui:latest $ECR_REGISTRY/$ECR_REPOSITORY_V
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_V
-          echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY-v" >> $GITHUB_OUTPUT
+          echo "uiimage=$ECR_REGISTRY/$ECR_REPOSITORY-V" >> $GITHUB_OUTPUT
           docker tag community-backend:latest $ECR_REGISTRY/$ECR_REPOSITORY_F
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_F
           echo "backendimage=$ECR_REGISTRY/$ECR_REPOSITORY_F" >> $GITHUB_OUTPUT
