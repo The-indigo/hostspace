@@ -41,7 +41,7 @@ resource "aws_ecs_task_definition" "theyemihostspaceTaskDefinition" {
   container_definitions = jsonencode([
            {
             "name": "ui",
-            "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/ui",
+            "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/ui:latest",
             "cpu": 512,
             "memory": 1024,
             "portMappings": [
@@ -72,7 +72,7 @@ resource "aws_ecs_task_definition" "theyemihostspaceTaskDefinition" {
         },
         {
             "name": "backend",
-            "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/backend",
+            "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/backend:latest",
             "cpu": 512,
             "memory": 1024,
             "portMappings": [],
