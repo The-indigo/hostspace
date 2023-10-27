@@ -7,7 +7,7 @@
             "memory": 1024,
             "portMappings": [
                 {
-                    "name": "backend",
+                    "name": "ui",
                     "containerPort": 80,
                     "hostPort": 80,
                     "protocol": "tcp",
