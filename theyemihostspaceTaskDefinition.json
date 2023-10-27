@@ -14,12 +14,6 @@
                     "appProtocol": "http"
                 }
             ],
-            "dependsOn":[
-                {
-                    "containerName": "backend",
-                    "condition": "start"
-                }
-            ],
             "essential": true,
             "environment": [],
             "environmentFiles": [],
