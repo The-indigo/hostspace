@@ -75,7 +75,7 @@ jobs:
         with:
           task-definition: ${{ steps.task-def-ui.outputs.task-definition }}
           container-name: ${{ env.CONTAINER_NAME_F }}
-          mage: ${{ steps.build-image.outputs.backendimage }}
+          image: ${{ steps.build-image.outputs.backendimage }}
 
 
       - name: Deploy Amazon ECS task definition
