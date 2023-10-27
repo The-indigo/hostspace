@@ -1,9 +1,8 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ca-central-1:568305562431:task-definition/theyemihostspaceTaskDefinition:3",
     "containerDefinitions": [
         {
             "name": "ui",
-            "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/ui",
+            "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/ui:latest",
             "cpu": 512,
             "memory": 1024,
             "portMappings": [
@@ -34,7 +33,7 @@
         },
         {
             "name": "backend",
-            "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/backend",
+            "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/backend:latest",
             "cpu": 512,
             "memory": 1024,
             "portMappings": [],
@@ -49,9 +48,7 @@
     "taskRoleArn": "arn:aws:iam::568305562431:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::568305562431:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 3,
     "volumes": [],
-    "status": "ACTIVE",
     "requiresAttributes": [
         {
             "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
@@ -83,7 +80,6 @@
     ],
     "placementConstraints": [],
     "compatibilities": [
-        "EC2",
         "FARGATE"
     ],
     "requiresCompatibilities": [
@@ -95,7 +91,5 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2023-10-27T02:53:33.558Z",
-    "registeredBy": "arn:aws:iam::568305562431:user/theyemi1",
     "tags": []
 }
