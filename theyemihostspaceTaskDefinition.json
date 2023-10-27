@@ -14,6 +14,12 @@
                     "appProtocol": "http"
                 }
             ],
+            "dependson":[
+                {
+                    "containername": "backend",
+                    "condition": "start"
+                }
+            ],
             "essential": true,
             "environment": [],
             "environmentFiles": [],
@@ -36,7 +42,15 @@
             "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/backend:latest",
             "cpu": 512,
             "memory": 1024,
-            "portMappings": [],
+            "portMappings": [
+                {
+                    "name": "ui-80-tcp",
+                    "containerPort": 5000,
+                    "hostPort": 5000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
             "essential": false,
             "environment": [],
             "environmentFiles": [],
