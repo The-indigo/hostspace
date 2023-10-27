@@ -90,7 +90,7 @@ network_mode =  "awsvpc"
 }
 
 
-
+#Service definition for the fargate cluster task
 resource "aws_ecs_service" "theyemihostspaceService" {
   name            = "theyemihostspaceservice"
   cluster         = aws_ecs_cluster.hostspaceCluster.id
