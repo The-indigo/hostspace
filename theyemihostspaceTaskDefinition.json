@@ -16,7 +16,7 @@
             ],
             "dependsOn":[
                 {
-                    "containername": "backend",
+                    "containerName": "backend",
                     "condition": "start"
                 }
             ],
