@@ -17,7 +17,7 @@
             "dependsOn":[
                 {
                     "containerName": "backend",
-                    "condition": "start"
+                    "condition": "START"
                 }
             ],
             "essential": true,
