@@ -7,11 +7,17 @@
             "memory": 1024,
             "portMappings": [
                 {
-                    "name": "ui-80-tcp",
+                    "name": "backend",
                     "containerPort": 80,
                     "hostPort": 80,
                     "protocol": "tcp",
                     "appProtocol": "http"
+                }
+            ],
+            "dependsOn":[
+                {
+                    "containerName": "backend",
+                    "condition": "start"
                 }
             ],
             "essential": true,
@@ -38,7 +44,7 @@
             "memory": 1024,
             "portMappings": [
                 {
-                    "name": "ui-80-tcp",
+                    "name": "backend",
                     "containerPort": 5000,
                     "hostPort": 5000,
                     "protocol": "tcp",
