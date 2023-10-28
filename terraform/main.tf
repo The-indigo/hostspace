@@ -18,13 +18,13 @@ resource "aws_ecr_repository" "hostspaceBackend" {
   }
 }
 
-#The container cluster to run tasks and services
+#The container cluster to run tasks and services with container insights enabled for monitoring
 resource "aws_ecs_cluster" "hostspaceCluster" {
   name = "theyemihostspacecluster"
 
   setting {
     name  = "containerInsights"
-    value = "disabled"
+    value = "enabled"
   }
 }
 
