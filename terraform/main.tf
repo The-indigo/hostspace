@@ -59,6 +59,12 @@ resource "aws_ecs_task_definition" "theyemihostspaceTaskDefinition" {
                     "appProtocol": "http"
                 }
             ],
+                        "dependsOn":[
+                {
+                    "containerName": "backend",
+                    "condition": "START"
+                }
+            ],
             "essential": true,
             "environment": [],
             "environmentFiles": [],
