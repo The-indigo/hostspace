@@ -111,7 +111,7 @@ resource "aws_ecs_service" "theyemihostspaceService" {
   task_definition = aws_ecs_task_definition.theyemihostspaceTaskDefinition.arn
   desired_count   = 1
 launch_type = "FARGATE"
-#These are the default subnets in my aws default vpc.
+#These are the default subnets in the aws default vpc.
 #The security has already been created in the console and opens port 80 and other required ports
   network_configuration {
     subnets = [ "subnet-02cb571218d81d7ee", "subnet-0049ab68963350a8c", "subnet-07f653468f06b14ff" ]
