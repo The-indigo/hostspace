@@ -87,7 +87,15 @@ resource "aws_ecs_task_definition" "theyemihostspaceTaskDefinition" {
             "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/backend:latest",
             "cpu": 1024,
             "memory": 2048,
-            "portMappings": [],
+                        "portMappings": [
+                {
+                    "name": "backend",
+                    "containerPort": 5000,
+                    "hostPort": 5000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
             "essential": false,
             "environment": [],
             "environmentFiles": [],
