@@ -1,3 +1,4 @@
+#Create the repository for the vue frontend image
 resource "aws_ecr_repository" "hostspaceUi" {
   name                 = "ui"
   image_tag_mutability = "MUTABLE"
@@ -7,6 +8,7 @@ resource "aws_ecr_repository" "hostspaceUi" {
   }
 }
 
+#Create the repository for the flask backend image
 resource "aws_ecr_repository" "hostspaceBackend" {
   name                 = "backend"
   image_tag_mutability = "MUTABLE"
@@ -16,6 +18,7 @@ resource "aws_ecr_repository" "hostspaceBackend" {
   }
 }
 
+#The container cluster to run tasks and services
 resource "aws_ecs_cluster" "hostspaceCluster" {
   name = "theyemihostspacecluster"
 
@@ -26,24 +29,27 @@ resource "aws_ecs_cluster" "hostspaceCluster" {
 }
 
 
+#Create the task definition to run the container service
+#I opted for the fargate serverless option with network mode awsvpc
+#Specifying the network mode allows gives the flexibility to configure networking
+#such as subnets, vpc and security group
 
 resource "aws_ecs_task_definition" "theyemihostspaceTaskDefinition" {
   family= "theyemihostspaceTaskDefinition"
   requires_compatibilities= ["FARGATE"]
-      cpu= "1024"
-    memory= "3072"
+      cpu= "2048"
+    memory= "5120"
     runtime_platform {
         cpu_architecture = "X86_64"
         operating_system_family = "LINUX"    
     }
-    # task_role_arn =   "arn:aws:iam::568305562431:role/ecsTaskExecutionRole"
-    # "executionRoleArn": "arn:aws:iam::568305562431:role/ecsTaskExecutionRole",
+
   container_definitions = jsonencode([
            {
             "name": "ui",
             "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/ui:latest",
-            "cpu": 512,
-            "memory": 1024,
+            "cpu": 1024,
+            "memory": 2048,
             "portMappings": [
                 {
                     "name": "ui-80-tcp",
@@ -73,8 +79,8 @@ resource "aws_ecs_task_definition" "theyemihostspaceTaskDefinition" {
         {
             "name": "backend",
             "image": "568305562431.dkr.ecr.ca-central-1.amazonaws.com/backend:latest",
-            "cpu": 512,
-            "memory": 1024,
+            "cpu": 1024,
+            "memory": 2048,
             "portMappings": [],
             "essential": false,
             "environment": [],
@@ -97,6 +103,8 @@ resource "aws_ecs_service" "theyemihostspaceService" {
   task_definition = aws_ecs_task_definition.theyemihostspaceTaskDefinition.arn
   desired_count   = 1
 launch_type = "FARGATE"
+#These are the default subnets in my aws default vpc.
+#The security has already been created in the console and opens port 80 and other required ports
   network_configuration {
     subnets = [ "subnet-02cb571218d81d7ee", "subnet-0049ab68963350a8c", "subnet-07f653468f06b14ff" ]
     security_groups = ["sg-0596a34e33519c972"]
