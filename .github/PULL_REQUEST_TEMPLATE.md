@@ -54,18 +54,18 @@ PENDING TASK COUNT - Number of pending tasks
 - Include screenshots or links showcasing the deployed application, CI/CD pipelines, and monitoring dashboards.
 
 ---
-![Screenshot of Elastic Container Registry with the Images](./screenshots/ecr.png)
-![Screenshot of the running task ID](./screenshots/runningtask.png)
+![Screenshot of Elastic Container Registry with the Images](../screenshots/ecr.png)
+![Screenshot of the running task ID](../screenshots/runningtask.png)
 ---
-![Screenshot showing the running task IP Address](./screenshots/taskipaddress.png)
+![Screenshot showing the running task IP Address](../screenshots/taskipaddress.png)
 ---
-![Screenshot showing the fullstack application running with the task IP Address](./screenshots/applicationrunning.png)
+![Screenshot showing the fullstack application running with the task IP Address](../screenshots/applicationrunning.png)
 ---
-![Screenshot showing the backend API running with the task IP Address](./screenshots/proxyrunning.png)
+![Screenshot showing the backend API running with the task IP Address](../screenshots/proxyrunning.png)
 ---
-![Screenshot showing the logs displaying succesful calls to the application](./screenshots/logs.png)
+![Screenshot showing the logs displaying succesful calls to the application](../screenshots/logs.png)
 ---
-![Screenshot displaying the monitoring dashboard](./screenshots/monitoring.png)
+![Screenshot displaying the monitoring dashboard](../screenshots/monitoring.png)
 
 ### Testing the Solution
 
